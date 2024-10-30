@@ -19,7 +19,8 @@ export class TasksService {
     async getTask(id: string) {
         const task = await this.tasksRepository
             .createQueryBuilder('task')
-            .where(`task.id = "${id}"`)
+            .leftJoinAndSelect('task.owner', 'user') //he anadido esta linea que asegura que cargamos el propietario
+            .where('task.id = :id', { id })
             .getOne();
 
         return task;
@@ -27,7 +28,6 @@ export class TasksService {
 
     async editTask(body: any) {
         await this.tasksRepository.update(body.id, body);
-
         const editedTask = await this.getTask(body.id);
 
         return editedTask;

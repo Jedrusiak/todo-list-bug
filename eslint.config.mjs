@@ -16,7 +16,12 @@ const compat = new FlatCompat({
 
 export default [
     {
-        ignores: ['**/.eslintrc.js'],
+        ignores: [
+            '**/.eslintrc.js',
+            '**/datasource.ts',
+            '**/eslint.config.mjs',
+            '**/dist/**',
+        ],
     },
     ...compat.extends(
         'plugin:@typescript-eslint/recommended',
@@ -38,8 +43,8 @@ export default [
             sourceType: 'module',
 
             parserOptions: {
-                project: 'tsconfig.json',
-                tsconfigRootDir: '/Users/javi/Documents/todo-list-bug',
+                project: path.resolve(__dirname, './tsconfig.json'),
+                tsconfigRootDir: '/Users/Tristan/todo-list-bug',
             },
         },
 
